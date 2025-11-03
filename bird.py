@@ -13,7 +13,7 @@ FLY_SPEED_PPS = (FLY_SPEED_MPS * PIXEL_PER_METER)
 
 TIME_PER_ACTION = 0.5
 ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
-FRAMES_PER_ACTION = 8
+FRAMES_PER_ACTION = 14
 
 class Bird:
     image = None
@@ -23,7 +23,7 @@ class Bird:
         self.y = random.randint(300, 500)
         self.dir = 1
         self.image = load_image('bird_animation.png')
-        pass
+
 
     def draw(self):
         if self.dir == 1:
@@ -34,7 +34,9 @@ class Bird:
 
 
     def update(self):
-        
+
+        self.frame = (self.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % FRAMES_PER_ACTION
+        self.bird.x += self.bird.dir * FLY_SPEED_PPS * game_framework.frame_time
         if self.x < 50:
             self.dir = 1
         elif self.x > 1550:
