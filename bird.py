@@ -22,6 +22,7 @@ class Bird:
         self.x = random.randint(100, 500)
         self.y = random.randint(300, 500)
         self.dir = 1
+        self.frame = 0
         self.image = load_image('bird_animation.png')
 
 
@@ -36,7 +37,7 @@ class Bird:
     def update(self):
 
         self.frame = (self.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % FRAMES_PER_ACTION
-        self.bird.x += self.bird.dir * FLY_SPEED_PPS * game_framework.frame_time
+        self.x += self.dir * FLY_SPEED_PPS * game_framework.frame_time
         if self.x < 50:
             self.dir = 1
         elif self.x > 1550:
